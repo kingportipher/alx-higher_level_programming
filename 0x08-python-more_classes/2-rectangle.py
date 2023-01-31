@@ -2,7 +2,7 @@
 """This module create a rectangle"""
 
 
-def Rectangle:
+class Rectangle:
     """
     class that generate a rectangle
     """
@@ -35,9 +35,9 @@ def Rectangle:
         if type(value) != int:
             raise TypeError("width must be an integer")
         if value < 0:
-            raise ValueError("height must be >= 0")
+            raise ValueError("width must be >= 0")
 
-        self.__width = valuei
+        self.__width = value
 
     @property
     def height(self):
@@ -51,6 +51,8 @@ def Rectangle:
     def height(self, value):
         """Setter function os height
         Arguments:
+        value {int} -- value of height
+        Raises:
         TypeError: height must be an integer
         ValueError: height must be >= 0
         """
@@ -64,15 +66,34 @@ def Rectangle:
     def area(self):
         """Generate area of the rectangle
         Returns:
-        Int --total are of rectangle
+        Int -- total area of rectangle
         """
-        returns self.__width * self.__height
+        return self.__width * self.__height
 
     def perimeter(self):
         """Find the perimeter of a rectangle
-        Returns: 
-        int -- total perimeter of the  rectangle
+        Returns:
+        int -- total perimeter of the rectangle
         """
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__height + self.__width)
+
+    def __str__(self):
+        """Method that get string representation rectangle
+        REturns:
+        string -- string representation
+        """
+        string = ""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        for row in range(self.__height):
+            for col in range(self.__width):
+                string = string + '#'
+            string = string + '\n'
+        return string[:-1]
+
+    def __repr__(self):
+        """Return string of the rectangle
+        """
+        return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
