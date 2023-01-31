@@ -19,7 +19,7 @@ class Rectangle:
     def width(self):
         """Getter function of width
         Returns:
-        int -- width of the rectangle
+        int -- width fo the rectangle
         """
         return self.__width
 
@@ -27,7 +27,7 @@ class Rectangle:
     def width(self, value):
         """Setter function to width
         Arguments:
-        value {int} -- [value of width]
+        value {int} -- [valeu of width]
         Raises:
         TypeError: width must be an integer
         ValueError: width must be >= 0
@@ -51,10 +51,10 @@ class Rectangle:
     def height(self, value):
         """Setter function os height
         Arguments:
-        value {int} -- value of height
+        value {int} -- Value of height
         Raises:
         TypeError: height must be an integer
-        ValueError: height must be > = 0
+        ValueError: height must be >= 0
         """
         if type(value) != int:
             raise TypeError("height must be an integer")
@@ -73,17 +73,17 @@ class Rectangle:
     def perimeter(self):
         """Find the perimeter of a rectangle
         Returns:
-        int -- total perimeter of the rectange
+        int -- total perimeter of the rectangle
         """
         if self.__width == 0 or self.__height == 0:
             return 0
-        return 2 * (self__height + self.__width)
+        return 2 * (self.__height + self.__width)
 
-    def __str__(selft):
+    def __str__(self):
         """Method that get string representation rectangle
-        REturns:
+        Returns:
         string -- string representation
-        """
+         """
         string = ""
         if self.__width == 0 or self.__height == 0:
             return ""
@@ -94,6 +94,6 @@ class Rectangle:
         return string[:-1]
 
     def __repr__(self):
-        """Return string of the rectangle
+        """Rerurn string of the rectangle
         """
         return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
