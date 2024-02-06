@@ -2,6 +2,9 @@
 
 def magic_calculation(a, b):
     result = 0
-    for i in range(1, 3):
-        result += a ** i + b ** i
-    return result
+    try:
+        for i in range(1, 3):
+            result += a ** i + b ** i
+    except TypeError:
+        print("Type error occurred!")
+    return resultt
