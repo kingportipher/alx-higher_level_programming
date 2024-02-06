@@ -7,4 +7,4 @@ def magic_calculation(a, b):
             result += a ** i + b ** i
     except TypeError:
         print("Type error occurred!")
-    return resultt
+    return result
