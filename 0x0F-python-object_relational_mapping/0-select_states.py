@@ -1,43 +1,50 @@
 #!/usr/bin/python3
 
 import MySQLdb
-"""Lists states"""
+import sys
 
-def list_states(username, password, db_name):
-    """Lists all states from the database hbtn_0e_0_usa.
+def list_states(username, password, database):
+    # Connect to MySQL server
+    try:
+        db = MySQLdb.connect(
+            host="localhost",
+            port=3306,
+            user=username,
+            passwd=password,
+            db=database
+        )
+        cursor = db.cursor()
+    except MySQLdb.Error as e:
+        print("Error connecting to MySQL:", e)
+        sys.exit(1)
 
-    Args:
-        username: MySQL username.
-        password: MySQL password.
-        db_name: Database name.
-    """
+    # Query to retrieve states from the database
+    query = "SELECT * FROM states ORDER BY id ASC"
 
     try:
-        # Connect to MySQL server
-        connection = MySQLdb.connect(host="localhost",
-                                     user=username,
-                                     passwd=password,
-                                     db=db_name)
-
-        cursor = connection.cursor()
-
-        # Get all states sorted by id
-        sql = "SELECT * FROM states ORDER BY states.id ASC;"
-        cursor.execute(sql)
-
-        # Fetch results and print them
-        for row in cursor:
-            print(row[0])  # Print state name (assuming it's the first column)
-
-    except MySQLdb.Error as err:
-        print(f"Error connecting to database: {err}")
-
+        # Execute the query
+        cursor.execute(query)
+        # Fetch all the results
+        results = cursor.fetchall()
+        # Display results
+        for row in results:
+            print(row)
+    except MySQLdb.Error as e:
+        print("Error executing MySQL query:", e)
+        sys.exit(1)
     finally:
-        # Close connection
-        if connection:
-            connection.close()
-
+        # Close the database connection
+        cursor.close()
+        db.close()
 
 if __name__ == "__main__":
-    # Script execution is disabled when imported
-    pass
+    if len(sys.argv) != 4:
+        print("Usage: python script.py <username> <password> <database>")
+        sys.exit(1)
+
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
+
+    list_states(username, password, database)
+
