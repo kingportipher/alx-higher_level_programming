@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import MySQLdb
-
+"""Lists states"""
 
 def list_states(username, password, db_name):
     """Lists all states from the database hbtn_0e_0_usa.
