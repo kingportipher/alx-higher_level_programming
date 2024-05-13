@@ -1,15 +1,25 @@
 #!/bin/bash
-#a Bash script that takes in a URL, sends a request to that URL, 
-#and displays the size of the body of the response
 
-# Check if the URL is provided
-if [ -z "$1" ]; then
+# Check if URL argument is provided
+if [ $# -eq 0 ]; then
     echo "Usage: $0 <URL>"
     exit 1
 fi
 
-# Send request using curl and get the size of the response body
-body_size=$(curl -sI "$1" | grep -i '^Content-Length:' | awk '{print $2}')
+# URL provided as argument
+URL=$1
+
+# Send request to URL and store response body in a temporary file
+response=$(curl -s -w "%{size_download}" -o /tmp/response_body "$URL")
+
+# Check if curl command was successful
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to fetch data from $URL"
+    exit 1
+fi
 
 # Display the size of the response body in bytes
-echo "$body_size"
+echo "Size of the response body: $response bytes"
+
+# Clean up temporary file
+rm /tmp/response_body
