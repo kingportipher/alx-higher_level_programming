@@ -1,0 +1,7 @@
+let url = 'https://swapi-api.alx-tools.com/api/people/5/?format=json';
+
+  // Fetch the character name using jQuery's get method
+  $.get(url, function(data, status) {
+    // Update the text of the DIV with id "character"
+    $('DIV#character').text(data.name);
+  });
